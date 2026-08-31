@@ -13,19 +13,15 @@ never be reported as recovered PE behaviour.
 
 ## Frame order
 
-`web/js/app.js` rAF callback, PE order Input → Update → Render:
+PE order Input → Update → Render, driven from `web/js/native-update-bridge.js`:
 
 ```js
 extraRuntime = inputBridge.toRuntimeInputs();   // 1. input  -> runtime inputs
 statePatch   = inputBridge.toStatePatch();      //            -> sparse deltas
 nativeBridge.tick(time, extraRuntime, statePatch);  // 2. native Game::Update
 inputBridge.consumeEdges();                     // 2a. drain this tick's edges
-/* phase from menuState23a74, not from having painted */
 glHost.beginFrame({ gameObject });              // 3. native Game::Render
 nativeBridge.renderTick(time);                  //    -> typed host events -> GL
-menuScene.update(state); glHost.submit(menuScene.commands());
-painted = !!result && glHost.endFrame() > 0;
-if (!painted) Module._isaac_tick(time);         // 4. host paint stub fallback
 ```
 
 `usesX86Emulation` stays `false` throughout; no seam here can re-enter the PE.
@@ -54,7 +50,6 @@ the frame lifecycle is inverted.
 | Game state | `scripts/decomp/game-state-snapshot.mjs` | Seeds both buffers from a capture taken out of a live run of the original binary |
 | Input | `scripts/decomp/frame-input-bridge.mjs` | **Host-side input bridge.** Key edges → menu-lane runtime inputs + sparse state deltas |
 | Render host bodies | `web/js/render-host-gl.js` | The render slice's 31 typed host kinds → real WebGL2 draws |
-| Menu presentation | `web/js/menu-scene.js` | Real mounted `titlemenu.anm2` + BMFont pages composed from native menu state |
 
 ### `session.tick(extraRuntime, statePatch)`
 
@@ -217,11 +212,6 @@ therefore derived from the Update slice's own sparse `menuState23a74`
 - The menu's *UI bodies* (`0x009b7680`, `0x009b6840`, `0x0098dba0`) are still
   host actions. Only the menu decision gates, continuations and menu-Aux
   `_Tree::_Erase` are native.
-- `menu-scene.js` is a presentation layer. The selection column geometry, the
-  prompt panel layout and the anm2→internal-pixel scale are labelled
-  presentation conventions; only the *decision* to show them is native. No game
-  menu copy is reproduced or invented — its text is a diagnostic of native
-  state rendered in the real font.
 - Several render host kinds draw documented placeholder quads because the event
   carries no geometry (entity position, anim position, vtable pair targets).
   The draw *count* and ordering are real; the pixels are not claimed to match.
@@ -231,31 +221,5 @@ therefore derived from the Update slice's own sparse `menuState23a74`
 
 ```bash
 node scripts/verify-native-frame-path.mjs
-```
-
-Real Chromium against the live page (`npm run serve` first). Reports each check
-independently and writes `output/decomp/frame-path-verification/verification.json`
-plus before/after screenshots. Checks: native-wasm selected, no PE, both slices
-loaded at model ABI, Update ticking, GL draws issued, canvas filled by pixel
-readback, Escape opening the native menu lane, phase following menu state.
-
-The page mounts only the file set the native frame path reads — the PE plus
-fonts and UI art, 407 of 11245 files — so boot is seconds rather than minutes.
-`?fullmount=1` mounts everything; nothing on the native path needs it today.
-
-Last run: **16/16 required checks passed** — native-wasm selected, `pe=0`,
-Update ABI 67 ticking, Render ABI 4 loaded, 42 GL draws over 42 frames, Escape
-moving `menuState23a74` 0 → 1, phase 1 → 2, 12 menu draw commands from the real
-assets (4 textures, 0 missing), 384 submitted draws, `~56 fps`.
-
-One informational check reports the canvas as black with the menu **closed**.
-That is correct native output, not a regression: the JS-owned Game buffer is
-zeroed, so the fade colour is black. The colourful frame it replaced was the
-host paint stub. Required pixel-fill is asserted with the menu open, where the
-real title art must be visible.
-
-Unit suites for the seams:
-
-```bash
-node --test tests/decomp-frame-path-state-patch.test.js tests/decomp-frame-path-render-wiring.test.js tests/decomp-frame-render-root.test.js tests/decomp-frame-input-bridge.test.js tests/render-host-gl.test.js tests/menu-scene.test.js
+npm run decomp:verify-slice
 ```

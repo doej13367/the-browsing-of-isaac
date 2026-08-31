@@ -189,6 +189,8 @@ node scripts/check-repo-safety.mjs
 | `scripts/decomp/frame-path.mjs` | Shipped frame-path selector, hybrid tick, residual host handler |
 | `scripts/decomp/build-*.mjs` / `verify-*.mjs` | Wasm build + differential |
 | `web/js/native-update-bridge.js` | Browser boot of the native Update session |
+| `web/js/render-host-gl.js` | Typed render-host events → WebGL2 |
+| `web/js/capture-wiring.js` | Live guest-memory capture lanes for blob-gated pures |
 | `docs/decomp-port.md` | Chronological ABI log (trust ABI constants over the prose if they disagree) |
 | `docs/decomp-runtime-wiring.md` | How rAF actually calls the slices |
 | `AGENTS.md` | Port rules, defect classes, evidence requirements |
@@ -204,7 +206,6 @@ cd path\to\the-browsing-of-isaac
 call %USERPROFILE%\emsdk\emsdk_env.bat
 npm run decomp:build-slice
 npm run decomp:build-render-slice
-npm run serve
 ```
 
 `identify-zhl-address.mjs` needs a local unpacked PE and the [REPENTOGON](https://github.com/TeamREPENTOGON/REPENTOGON) signature database checked out beside the tree (not vendored here).

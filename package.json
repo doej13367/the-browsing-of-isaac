@@ -11,7 +11,6 @@
     "decomp:verify-render-slice": "node scripts/decomp/verify-game-render-slice.mjs",
     "decomp:identify": "node scripts/decomp/identify-zhl-address.mjs",
     "build:wasm": "node scripts/build-wasm.mjs",
-    "serve": "node scripts/serve.mjs",
     "repo:check": "node scripts/check-repo-safety.mjs"
   },
   "engines": {
