@@ -1,9 +1,6 @@
-# Remaining work — detailed ledger
+# Remaining work
 
-Authoritative counts come from `decomp/game-update-slice.json` and
-`grep ABI_VERSION scripts/decomp/*-model.mjs`. Refreshed **2026-08-31**.
-
-If this file and a header disagree, the header wins.
+Update ABI **99** · 24 host residuals remaining · 27 removed.
 
 ## Scoreboard
 
