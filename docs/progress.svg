@@ -15,7 +15,7 @@
   <rect class="bg" width="920" height="420" rx="16"/>
   <rect class="card" x="16" y="16" width="888" height="388" rx="12"/>
   <text class="title" x="40" y="56">The Browsing of Isaac — decomp progress</text>
-  <text class="sub" x="40" y="78">Snapshot 2026-08-31 · Update ABI 99 · 24 host residuals remaining · private source-only tree</text>
+  <text class="sub" x="40" y="78">Snapshot 2026-08-31 · Update ABI 99 · 24 host residuals remaining</text>
 
   <text class="label" x="40" y="122">Game::Update control flow</text>
   <text class="meta" x="720" y="122">100%  ret @ 0x006fbbba</text>

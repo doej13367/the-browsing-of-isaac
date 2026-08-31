@@ -1,6 +1,6 @@
 # The Browsing of Isaac
 
-Private, source-only native/Wasm decompilation of **The Binding of Isaac: Repentance+**.
+Native/Wasm decompilation of **The Binding of Isaac: Repentance+**.
 
 This tree is the decomp port itself: C++ translations, independent JavaScript oracles, recovered ABI contracts, and the browser host that drives them. It does **not** ship the game, assets, the PE, Ghidra projects, test harnesses, probe scripts, or emulator leftovers.
 

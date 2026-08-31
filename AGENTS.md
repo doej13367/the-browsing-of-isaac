@@ -17,7 +17,7 @@ depends on x86 emulation and runtime behavior is verified against the original.
 - The executable and all binary-derived output are local evidence, not source.
   Never commit game executables, assets, Ghidra projects, decompiler listings,
   disassembly dumps, runtime captures, or generated Wasm/native objects.
-- Private roots must remain ignored: `/tools/`, `/output/`, and
+- Local analysis roots must remain ignored: `/tools/`, `/output/`, and
   `/re/ghidra_project/`. Confirm important generated files with
   `git check-ignore -v` before finishing a work unit.
 - The canonical local analysis input is `tools/isaac-ng.unpacked.exe`, currently
