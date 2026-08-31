@@ -208,16 +208,3 @@ npm run serve
 ```
 
 `identify-zhl-address.mjs` needs a local unpacked PE and the [REPENTOGON](https://github.com/TeamREPENTOGON/REPENTOGON) signature database checked out beside the tree (not vendored here).
-
----
-
-## What was stripped from this snapshot
-
-On purpose, so the GitHub tree is the decomp rather than the workbench:
-
-- `tests/`, Playwright probes, `_*.mjs` one-offs, `*.bak`, census dumps
-- BoxedWine / Wine / emulator pages and the 11 FPS baseline runtime
-- `output/`, `tools/`, Ghidra projects, `section-notes/` disassembly
-- Game instance zip, extracted assets, generated `.wasm` / `.dll`
-
-Those remain on the local worktree. They are not source.
