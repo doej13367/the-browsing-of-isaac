@@ -1,0 +1,20 @@
+{
+  "name": "the-browsing-of-isaac",
+  "version": "0.99.0",
+  "private": true,
+  "type": "module",
+  "description": "Source-only native/Wasm decompilation of a user-owned Binding of Isaac: Repentance+ install",
+  "scripts": {
+    "decomp:build-slice": "node scripts/decomp/build-game-update-slice.mjs",
+    "decomp:verify-slice": "node --max-old-space-size=1024 scripts/decomp/verify-game-update-slice.mjs",
+    "decomp:build-render-slice": "node scripts/decomp/build-game-render-slice.mjs",
+    "decomp:verify-render-slice": "node scripts/decomp/verify-game-render-slice.mjs",
+    "decomp:identify": "node scripts/decomp/identify-zhl-address.mjs",
+    "build:wasm": "node scripts/build-wasm.mjs",
+    "serve": "node scripts/serve.mjs",
+    "repo:check": "node scripts/check-repo-safety.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

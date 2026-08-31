@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" role="img" aria-label="Decompilation progress">
+  <style>
+    .bg { fill: #141414; }
+    .card { fill: #1c1c1c; stroke: #2a2a2a; }
+    .title { fill: #f4f1ea; font: 700 22px "Segoe UI", system-ui, sans-serif; }
+    .sub { fill: #a8a398; font: 400 13px "Segoe UI", system-ui, sans-serif; }
+    .label { fill: #ddd8cc; font: 600 13px "Segoe UI", system-ui, sans-serif; }
+    .meta { fill: #8f8a80; font: 400 12px "Consolas", "Segoe UI", monospace; }
+    .track { fill: #2b2b2b; }
+    .done { fill: #c44536; }
+    .partial { fill: #d4a017; }
+    .live { fill: #4aa3a2; }
+    .note { fill: #7a756c; font: 400 11px "Segoe UI", system-ui, sans-serif; }
+  </style>
+  <rect class="bg" width="920" height="420" rx="16"/>
+  <rect class="card" x="16" y="16" width="888" height="388" rx="12"/>
+  <text class="title" x="40" y="56">The Browsing of Isaac — decomp progress</text>
+  <text class="sub" x="40" y="78">Snapshot 2026-08-31 · Update ABI 99 · 24 host residuals remaining · private source-only tree</text>
+
+  <text class="label" x="40" y="122">Game::Update control flow</text>
+  <text class="meta" x="720" y="122">100%  ret @ 0x006fbbba</text>
+  <rect class="track" x="40" y="132" width="840" height="18" rx="9"/>
+  <rect class="done" x="40" y="132" width="840" height="18" rx="9"/>
+
+  <text class="label" x="40" y="178">Update opaque records removed</text>
+  <text class="meta" x="720" y="178">53%  27 / 51</text>
+  <rect class="track" x="40" y="188" width="840" height="18" rx="9"/>
+  <rect class="done" x="40" y="188" width="445" height="18" rx="9"/>
+
+  <text class="label" x="40" y="234">Remaining residuals by class</text>
+  <text class="meta" x="640" y="234">14 narrowed · 7 host · 3 declined</text>
+  <rect class="track" x="40" y="244" width="840" height="18" rx="9"/>
+  <!-- 14/24 yellow, 7/24 red, 3/24 teal of the remaining bar, shown as stacked over full 24 -->
+  <rect class="partial" x="40" y="244" width="490" height="18" rx="9"/>
+  <rect class="done" x="530" y="244" width="245" height="18"/>
+  <rect class="live" x="775" y="244" width="105" height="18" rx="9"/>
+  <rect class="done" x="775" y="244" width="20" height="18"/>
+
+  <text class="label" x="40" y="290">Live PE-free frame path</text>
+  <text class="meta" x="620" y="290">hybrid  native Update tick, residual hosts</text>
+  <rect class="track" x="40" y="300" width="840" height="18" rx="9"/>
+  <rect class="live" x="40" y="300" width="252" height="18" rx="9"/>
+
+  <text class="note" x="40" y="348">Done is not “green tests”. The port is complete only when the shipped rAF path has no x86 emulation and runtime behaviour matches the original PE.</text>
+  <text class="note" x="40" y="368">Irreducible residuals (Win32 locks, lua_pcallk of mod bytecode, guest alloc, virtual dtors) stay typed host events. They count until a capture contract makes them droppable.</text>
+  <text class="note" x="40" y="388">Next work: peel the 14 narrowed Update records, then pin Render / Input / Exit / Lua roots into the live frame loop.</text>
+</svg>

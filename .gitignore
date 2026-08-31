@@ -1,0 +1,41 @@
+# Dependencies and local state
+/node_modules/
+/.scratch/
+/.snapshots/
+/.restore-snap/
+/re/ghidra_project/
+**/__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
+.game-root
+
+# Proprietary / generated (never commit)
+/extracted_resources/
+/extracted_work/
+/tools/
+/output/
+/game-instance/
+/cpu-dump/
+/section-notes/
+/web/isaac-host.js
+/web/isaac-host.wasm
+/native/**/*.dll
+*.wasm
+
+# Binary-derived inventories
+/docs/strings-interesting.txt
+/docs/pe-imports.json
+/docs/phase1-binary-recovery.json
+
+# Editor / agent slop
+/_*/
+*.bak
+*.bak-*
+*.tmp
+*.mutbak
+*.torn-*
+*.new
+*.inc
+probe-*.mjs
